@@ -1,0 +1,20 @@
+Ejercicio simple: Libros
+
+Tenés una tabla libros con los siguientes campos:
+
+id, titulo, autor, precio, stock, genero, calificacion.
+
+Realizá las siguientes consultas:
+
+Mostrar todos los libros.
+Mostrar solamente titulo y autor.
+Mostrar los libros que tengan un precio menor a 20000.
+Mostrar los libros con una calificación mayor o igual a 8.
+Mostrar los libros del género "Novela".
+Mostrar los libros que tengan stock mayor a 5.
+Mostrar los libros que sean del género "Ciencia" o "Historia".
+Ordenar los libros por precio de menor a mayor.
+Mostrar solamente los 3 libros con mayor calificación.
+Cambiar el precio de un libro.
+Aumentar el stock de un libro en 5 unidades.
+Eliminar un libro por su id.
