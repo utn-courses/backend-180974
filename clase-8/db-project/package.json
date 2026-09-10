@@ -1,0 +1,21 @@
+{
+  "name": "db-project",
+  "version": "1.0.0",
+  "description": "Un simple proyecto para prácticar base de datos",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "node --watch ./src/index.ts",
+    "start": "node ./dist/index.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "mongoose": "^9.10.0"
+  }
+}
