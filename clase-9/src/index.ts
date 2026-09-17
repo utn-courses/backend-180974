@@ -17,7 +17,7 @@ const productos = db.collection("productos")
 
 const argumentos = process.argv.splice(2)
 const accion = argumentos[0]
-const id = argumentos[1]
+const id = new ObjectId(argumentos[1])
 
 const leerProductos = async () => {
   const data = await productos.find().toArray()
@@ -36,6 +36,9 @@ const agregarProducto = async (nombre: string, precio: number, stock: number, ca
 }
 
 const borrarProducto = async (id: ObjectId) => {
+  if (!id) {
+    return "ID obligatorio para borrar producto"
+  }
   console.log(await productos.findOne({ _id: new ObjectId(id) }))
   await productos.deleteOne({ _id: new ObjectId(id) })
 }
@@ -47,13 +50,28 @@ interface IProducto {
   stock: number
 }
 
-const actualizarProducto = async (id: ObjectId, data: any) => {
-  const resultado = await productos.updateOne(
-    { _id: new ObjectId(id) },
-    { $set: data })
 
-  return resultado
+const actualizarProducto = async (id: ObjectId, actualizaciones: string[]) => {
+  const nuevaInfo: Partial<IProducto> = {}
+
+  // [--nombre, bicicleta, --precio, 1, --categoria, deporte]
+  for (let index = 0; index < actualizaciones.length; index = index + 2) {
+    const propiedadAActualizar = actualizaciones[index].replace("--", "")
+    const valoresDePropAActualizar = actualizaciones[index + 1]
+    console.log(propiedadAActualizar)
+    console.log(valoresDePropAActualizar)
+
+    if (propiedadAActualizar === "precio" || propiedadAActualizar === "stock") {
+      nuevaInfo[propiedadAActualizar] = +valoresDePropAActualizar
+    } else {
+      nuevaInfo[propiedadAActualizar as keyof IProducto] = valoresDePropAActualizar as never
+    }
+  }
+
+  productos.updateOne({ _id: id }, { $set: nuevaInfo })
+  return productos.findOne({ _id: id })
 }
+
 
 switch (accion) {
   case "info":
@@ -68,10 +86,10 @@ switch (accion) {
     console.log(await leerProductos())
     process.exit(1)
   case "delete":
-    await borrarProducto(new ObjectId(id))
+    await borrarProducto(id)
     process.exit(1)
   case "update":
-    console.log(await actualizarProducto(new ObjectId(id), argumentos[2]))
+    console.log(await actualizarProducto(id, argumentos.splice(2)))
     process.exit(1)
   case "create":
     // node ./src/index.ts create pc 1000 10 hogar
