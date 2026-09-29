@@ -1,0 +1,15 @@
+[
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "29/9/2026, 05:41:06",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "tiempoActividad": "32 horas y 39 minutos"
+    }
+  }
+]
