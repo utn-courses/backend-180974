@@ -1,0 +1,126 @@
+[
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "1/10/2026, 04:57:22",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "ip": [
+        "Wi-Fi: 192.168.1.3"
+      ],
+      "tiempoActividad": "6 horas y 9 minutos"
+    }
+  },
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "1/10/2026, 04:59:28",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "ip": [
+        "Wi-Fi: 192.168.1.3"
+      ],
+      "tiempoActividad": "6 horas y 11 minutos"
+    }
+  },
+  {
+    "tipo": "Consultar memoria RAM",
+    "fecha": "1/10/2026, 05:04:15",
+    "datos": {
+      "totalGB": 13.93,
+      "libreGB": 4.29,
+      "usadaGB": 9.64,
+      "porcentajeUso": 69
+    },
+    "usuario": "gabia"
+  },
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "1/10/2026, 05:05:54",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "ip": [
+        "Wi-Fi: 192.168.1.3"
+      ],
+      "tiempoActividad": "6 horas y 18 minutos"
+    }
+  },
+  {
+    "tipo": "Consultar memoria RAM",
+    "fecha": "1/10/2026, 05:05:57",
+    "datos": {
+      "totalGB": 13.93,
+      "libreGB": 4.53,
+      "usadaGB": 9.4,
+      "porcentajeUso": 67
+    },
+    "usuario": "gabia"
+  },
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "1/10/2026, 05:06:01",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "ip": [
+        "Wi-Fi: 192.168.1.3"
+      ],
+      "tiempoActividad": "6 horas y 18 minutos"
+    }
+  },
+  {
+    "tipo": "Ver información del sistema",
+    "fecha": "1/10/2026, 05:12:41",
+    "datos": {
+      "sistema": "Windows_NT",
+      "plataforma": "win32",
+      "arquitectura": "x64",
+      "version": "10.0.19045",
+      "procesadoresLogicos": 8,
+      "usuario": "gabia",
+      "ip": [
+        "Wi-Fi: 192.168.1.3"
+      ],
+      "tiempoActividad": "6 horas y 25 minutos"
+    }
+  },
+  {
+    "tipo": "Consultar memoria RAM",
+    "fecha": "1/10/2026, 05:14:45",
+    "datos": {
+      "totalGB": 13.93,
+      "libreGB": 4.07,
+      "usadaGB": 9.86,
+      "porcentajeUso": 71
+    },
+    "usuario": "gabia"
+  },
+  {
+    "tipo": "Consultar memoria RAM",
+    "fecha": "1/10/2026, 05:15:32",
+    "datos": {
+      "totalGB": 13.93,
+      "libreGB": 4.05,
+      "usadaGB": 9.88,
+      "porcentajeUso": 71
+    },
+    "usuario": "gabia"
+  }
+]
