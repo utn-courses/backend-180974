@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Films API</title>
+</head>
+<body>
+
+  <h1>🎬 Films API</h1>
+
+  <hr>
+
+  <h2>Listar películas</h2>
+
+  <button onclick="obtenerPeliculas()">Obtener películas</button>
+
+  <ul id="lista-peliculas"></ul>
+
+  <hr>
+
+  <h2>Buscar película por ID</h2>
+
+  <input type="number" id="buscar-id" placeholder="ID">
+
+  <button onclick="buscarPelicula()">Buscar</button>
+
+  <div id="pelicula-encontrada"></div>
+
+  <hr>
+
+  <h2>Agregar película</h2>
+
+  <form id="form-agregar">
+
+    <input
+      type="text"
+      id="titulo"
+      placeholder="Título"
+    >
+
+    <input
+      type="number"
+      id="anio"
+      placeholder="Año"
+    >
+
+    <input
+      type="text"
+      id="genero"
+      placeholder="Género"
+    >
+
+    <button type="submit">
+      Agregar película
+    </button>
+
+  </form>
+
+  <p id="mensaje-agregar"></p>
+
+  <hr>
+
+  <h2>Editar película</h2>
+
+  <form id="form-editar">
+
+    <input
+      type="number"
+      id="editar-id"
+      placeholder="ID"
+    >
+
+    <input
+      type="text"
+      id="editar-titulo"
+      placeholder="Nuevo título"
+    >
+
+    <input
+      type="number"
+      id="editar-anio"
+      placeholder="Nuevo año"
+    >
+
+    <input
+      type="text"
+      id="editar-genero"
+      placeholder="Nuevo género"
+    >
+
+    <button type="submit">
+      Editar película
+    </button>
+
+  </form>
+
+  <p id="mensaje-editar"></p>
+
+  <hr>
+
+  <h2>Eliminar película</h2>
+
+  <input
+    type="number"
+    id="eliminar-id"
+    placeholder="ID"
+  >
+
+  <button onclick="eliminarPelicula()">
+    Eliminar
+  </button>
+
+  <p id="mensaje-eliminar"></p>
+
+  <script>
+
+    const API_URL = "http://localhost:1234/films"
+
+    // GET /films
+    async function obtenerPeliculas() {
+
+      const response = await fetch(API_URL)
+
+      const films = await response.json()
+
+      const lista = document.querySelector("#lista-peliculas")
+
+      lista.innerHTML = ""
+
+      films.forEach(film => {
+
+        const li = document.createElement("li")
+
+        li.textContent =
+          `${film.id} - ${film.title} - ${film.year} - ${film.genre}`
+
+        lista.appendChild(li)
+
+      })
+
+    }
+
+    // GET /films/:id
+    async function buscarPelicula() {
+
+      const id = document.querySelector("#buscar-id").value
+
+      const response = await fetch(`${API_URL}/${id}`)
+
+      const resultado = document.querySelector("#pelicula-encontrada")
+
+      if (!response.ok) {
+
+        resultado.textContent = "Película no encontrada"
+
+        return
+
+      }
+
+      const film = await response.json()
+
+      resultado.innerHTML = `
+        <p>
+          <strong>${film.title}</strong>
+          (${film.year}) - ${film.genre}
+        </p>
+      `
+
+    }
+
+    // POST /films
+    document
+      .querySelector("#form-agregar")
+      .addEventListener("submit", async event => {
+
+        event.preventDefault()
+
+        const title =
+          document.querySelector("#titulo").value
+
+        const year =
+          Number(document.querySelector("#anio").value)
+
+        const genre =
+          document.querySelector("#genero").value
+
+        const response = await fetch(API_URL, {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            title,
+            year,
+            genre
+          })
+
+        })
+
+        const data = await response.json()
+
+        document.querySelector("#mensaje-agregar")
+          .textContent = data.message || data.error
+
+        obtenerPeliculas()
+
+      })
+
+    // PATCH /films/:id
+    document
+      .querySelector("#form-editar")
+      .addEventListener("submit", async event => {
+
+        event.preventDefault()
+
+        const id =
+          document.querySelector("#editar-id").value
+
+        const title =
+          document.querySelector("#editar-titulo").value
+
+        const year =
+          Number(document.querySelector("#editar-anio").value)
+
+        const genre =
+          document.querySelector("#editar-genero").value
+
+        const response = await fetch(`${API_URL}/${id}`, {
+
+          method: "PATCH",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            title,
+            year,
+            genre
+          })
+
+        })
+
+        const data = await response.json()
+
+        document.querySelector("#mensaje-editar")
+          .textContent = data.message || data.error
+
+        obtenerPeliculas()
+
+      })
+
+    // DELETE /films/:id
+    async function eliminarPelicula() {
+
+      const id =
+        document.querySelector("#eliminar-id").value
+
+      const response = await fetch(`${API_URL}/${id}`, {
+
+        method: "DELETE"
+
+      })
+
+      const data = await response.json()
+
+      document.querySelector("#mensaje-eliminar")
+        .textContent = data.message || data.error
+
+      obtenerPeliculas()
+
+    }
+
+    // Cargar películas automáticamente
+    obtenerPeliculas()
+
+  </script>
+
+</body>
+</html>
