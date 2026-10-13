@@ -1,0 +1,50 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "title": "The Matrix",
+    "year": 1999,
+    "genre": "Ciencia ficción"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "title": "Interstellar",
+    "year": 2014,
+    "genre": "Ciencia ficción"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "title": "The Godfather",
+    "year": 1972,
+    "genre": "Drama"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440004",
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "genre": "Crimen"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440005",
+    "title": "Toy Story",
+    "year": 1995,
+    "genre": "Animación"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440006",
+    "title": "La Bola Negra",
+    "year": 2026,
+    "genre": "Drama"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440007",
+    "title": "Coward",
+    "year": 2026,
+    "genre": "Romance"
+  },
+  {
+    "id": "4548d2eb-450b-40ef-8d07-ed180a458019",
+    "title": "Coward 2",
+    "year": 2026,
+    "genre": "Romance"
+  }
+]
