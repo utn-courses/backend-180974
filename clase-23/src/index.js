@@ -1,8 +1,8 @@
 import express from "express"
 import cors from "cors"
 import { filmsRouter } from "./routes/filmsRouter.js"
-import { connectMongoDb } from "./config/connectMongoDb.js"
 import { usersRouter } from "./routes/usersRouter.js"
+import { connectMongoDb } from "./config/connectMongoDb.js"
 import { authMiddleware } from "./middleware/authMiddleware.js"
 
 process.loadEnvFile()

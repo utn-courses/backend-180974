@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken"
+
 const authMiddleware = (req, res, next) => {
   try {
     const header = req.headers.authorization
@@ -11,6 +13,7 @@ const authMiddleware = (req, res, next) => {
     if (!token) {
       return res.status(401).json({ error: "Formato de token invalido" })
     }
+
     const isValid = jwt.verify(token, "contraseñasupersecreta")
 
     if (!isValid) {
@@ -22,6 +25,11 @@ const authMiddleware = (req, res, next) => {
     if (error.name === "JsonWebTokenError") {
       return res.status(401).json({ error: "Token invalido" })
     }
+    console.log(error)
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ error: "Token vencido" })
+    }
+    res.status(500).json({ error: "Internal server error" })
   }
 }
 

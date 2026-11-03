@@ -1,6 +1,7 @@
 import { User } from "../models/userModel.js"
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { successResponse } from "../utils/index.js"
 
 const getUsers = async (req, res) => {
   const users = await User.find()
@@ -35,7 +36,7 @@ const registerUser = async (req, res) => {
       password: passwordEncrypted
     })
 
-    return res.json(newUser)
+    return res.json(successResponse(newUser, "Usuario creado exitosamente"))
   } catch (error) {
     res.status(500).json({ error: "Error interno del servidor" })
   }
@@ -71,7 +72,7 @@ const loginUser = async (req, res) => {
     // opciones de configuración → defina el vencimiento
     const token = jwt.sign({ name: foundUser.name }, "contraseñasupersecreta", { expiresIn: "1h" })
 
-    res.json({ token })
+    res.json(successResponse(token, "Loggin exitoso"))
   } catch (error) {
     res.status(500).json({ error: "Error interno del servidor" })
   }

@@ -1,7 +1,8 @@
 import { Film } from "../models/filmModel.js"
 import { HTTP_MESSAGES } from "../constants/index.js"
+import { successResponse } from "../utils/index.js"
 import mongoose from "mongoose"
-import jwt from "jsonwebtoken"
+import { filmSchema } from "../validators/filmValidators.js"
 
 const filterFilms = async (req, res) => {
   const { title, genre, year, yearFrom, yearTo, results, offset } = req.query
@@ -44,42 +45,49 @@ const filterFilms = async (req, res) => {
 }
 
 const getFilms = async (req, res) => {
-
   try {
     const films = await Film.find()
-    res.json(films)
+    res.json(successResponse(films, "Peliculas recuperadas con éxito"))
   } catch (error) {
     if (error.name === "MongooseError") {
-      return res.status(500).json({ error: HTTP_MESSAGES.mongooseError })
+      return res.status(500).json({
+        success: false,
+        message: HTTP_MESSAGES.mongooseError
+      })
     }
-    res.status(500).json({ error: HTTP_MESSAGES.getErrorFilms })
+    res.status(500).json({
+      success: false,
+      message: HTTP_MESSAGES.getErrorFilms
+    })
   }
 }
 
 const postFilm = async (req, res) => {
   try {
     const body = req.body
-    const currentYear = new Date().getFullYear()
 
-    const { title, year } = body
+    // Incluir validaciones
+    const validation = filmSchema.safeParse(body)
 
-    if (!title || !year) {
-      return res.status(400).json({ error: "Datos invalidos, para crear una pelicula se requiere al menos título y año de estreno" })
+    if (!validation.success) {
+      return res.status(400).json({
+        error: validation.error.issues.map(e => ({
+          origin: e.path[0],
+          message: e.message
+        }))
+      })
     }
 
-    if (year < 1888 || year > currentYear) {
-      return res.status(400).json({ error: `El año de estreno tiene que ser entre 1888 y ${currentYear}` })
-    }
-
-    const foundFilm = await Film.findOne({ title })
+    const foundFilm = await Film.findOne({ title: body.title })
 
     if (foundFilm) {
       return res.status(409).json({ error: "La pelicula ya existe en la base de datos" })
     }
 
     const newFilm = await Film.create(body)
-    res.status(201).json(newFilm)
+    res.status(201).json(successResponse(newFilm, "Pelicula creada exitosamente"))
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: HTTP_MESSAGES.createErrorFilm })
   }
 }
@@ -95,11 +103,22 @@ const patchFilm = async (req, res) => {
       throw error
     }
 
+    const validation = filmSchema.partial().safeParse(body)
+
+    if (!validation.success) {
+      return res.status(400).json({
+        error: validation.error.issues.map(e => ({
+          origin: e.path[0],
+          message: e.message
+        }))
+      })
+    }
+
     const updatedFilm = await Film.findByIdAndUpdate(id, body, { new: true })
     if (!updatedFilm) {
       return res.status(404).json({ error: "La pelicula no se encuentra en nuestra base de datos" })
     }
-    res.json(updatedFilm)
+    res.json(successResponse(updatedFilm, "Pelicula actualizada con éxito"))
   } catch (error) {
     if (error.name === "invalidId") {
       return res.status(400).json({ error: "ID invalido, debería ser en formato ObjectId" })
@@ -122,7 +141,7 @@ const deleteFilms = async (req, res) => {
       return res.status(404).json({ error: "La pelicula no se encuentra en nuestra base de datos" })
     }
 
-    res.json({ message: "Pelicula borrada exitosamente" })
+    res.json(successResponse(deletedFilm, "Pelicula borrada con éxito"))
   } catch (error) {
     res.status(500).json({ error: "Disculpa, tuvimos un error, intentalo en la brevedad..." })
   }
