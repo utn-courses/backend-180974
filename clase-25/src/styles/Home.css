@@ -9,7 +9,40 @@
   margin-bottom: 20px;
 }
 
-#home section {
+#home #form {
+  display: block;
+}
+
+#form form {
+  background-color: yellowgreen;
+  width: 250px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+#form h2 {
+  text-align: center;
+}
+
+#form form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+#form form button {
+  width: 100%;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#form form button:hover {
+  background-color: rgb(211, 208, 208);
+}
+
+#home #films {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
