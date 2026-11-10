@@ -1,0 +1,22 @@
+#home {
+  background-color: aquamarine;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+#home h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#home section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+#home div {
+  background-color: brown;
+  padding: 10px;
+  text-align: center;
+}
