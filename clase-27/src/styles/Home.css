@@ -1,0 +1,85 @@
+#home {
+  background-color: aquamarine;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+#home h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#home #form {
+  display: block;
+}
+
+#form form {
+  background-color: yellowgreen;
+  width: 250px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+#form h2 {
+  text-align: center;
+}
+
+#form form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+#form form button {
+  width: 100%;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#form form button:hover {
+  background-color: rgb(211, 208, 208);
+}
+
+#home #films {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+#home div {
+  background-color: bisque;
+  padding: 10px;
+  text-align: center;
+}
+
+#home .btn-delete {
+  padding: 5px 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: crimson;
+  color: white;
+  cursor: pointer;
+  transition: 0.1s background-color;
+}
+
+#home .btn-update {
+  padding: 5px 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(96, 131, 213);
+  color: white;
+  cursor: pointer;
+  transition: 0.1s background-color;
+}
+
+.btn-delete:hover {
+  background-color: rgb(239, 120, 144);
+}
+
+.btn-update:hover {
+  background-color: red;
+}
